@@ -222,7 +222,7 @@ public class MoviesApiTest {
     }
 
     @Test
-    void Movies_deleteFilm() throws Exception {
+    void movies_deleteFilm() throws Exception {
 
         HttpRequest req10 = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
@@ -257,7 +257,7 @@ public class MoviesApiTest {
     }
 
     @Test
-    void Movies_notAllowedMethod() throws Exception {
+    void movies_notAllowedMethod() throws Exception {
         HttpRequest req13 = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
                 .header("Content-Type", "application/json")
