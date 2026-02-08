@@ -21,7 +21,6 @@ abstract class BaseHttpHandler implements HttpHandler {
             os.write(bytes);
 
         }
-
     }
     
     protected void sendNoContent(HttpExchange ex) throws java.io.IOException {
