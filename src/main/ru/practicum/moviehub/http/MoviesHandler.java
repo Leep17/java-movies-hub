@@ -82,7 +82,8 @@ public class MoviesHandler extends BaseHttpHandler { // Расширьте ба�
             Movie movie;
             try {
                 movie = gson.fromJson(body, Movie.class);
-            } catch (Exception e) {sendJson(ex, 422, gson.toJson(new ErrorResponse("Ошибка валидации", List.of("некорректный JSON"))));
+            } catch (Exception e) {
+                sendJson(ex, 422, gson.toJson(new ErrorResponse("Ошибка валидации", List.of("некорректный JSON"))));
                 return;
             }
             String title = movie.getTitle();
@@ -92,7 +93,7 @@ public class MoviesHandler extends BaseHttpHandler { // Расширьте ба�
 
             if (title == null || title.isBlank()) {
                 details.add("Название не должно быть пустым");
-            } else if (title.length()>100) {
+            } else if (title.length() > 100) {
                 details.add("Название не должно быть более 100 знаков");
             }
             if (year < 1888 || year >currentYear + 1) {
