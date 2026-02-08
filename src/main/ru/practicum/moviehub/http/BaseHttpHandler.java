@@ -10,6 +10,13 @@ import java.io.OutputStream;
 abstract class BaseHttpHandler implements HttpHandler {
     protected static final String CT_JSON = "application/json; charset=UTF-8";
 
+    protected void sendNoContent(HttpExchange ex) throws java.io.IOException {
+
+        ex.getResponseHeaders().set("Content-Type", CT_JSON);
+        ex.sendResponseHeaders(204, -1);
+
+    }
+
     protected void sendJson(HttpExchange ex, int status, String json) throws IOException {
 
         ex.getResponseHeaders().set("Content-Type", CT_JSON);
@@ -21,12 +28,5 @@ abstract class BaseHttpHandler implements HttpHandler {
             os.write(bytes);
 
         }
-    }
-    
-    protected void sendNoContent(HttpExchange ex) throws java.io.IOException {
-
-        ex.getResponseHeaders().set("Content-Type", CT_JSON);
-        ex.sendResponseHeaders(204, -1);
-
     }
 }
