@@ -2,7 +2,6 @@ package ru.practicum.moviehub.http;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.io.OutputStream;
@@ -24,6 +23,7 @@ abstract class BaseHttpHandler implements HttpHandler {
         }
 
     }
+    
     protected void sendNoContent(HttpExchange ex) throws java.io.IOException {
 
         ex.getResponseHeaders().set("Content-Type", CT_JSON);
