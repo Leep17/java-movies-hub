@@ -30,34 +30,34 @@ public class MoviesHandler extends BaseHttpHandler { // Расширьте ба�
         String[] parts = path.split("/");
         String method = ex.getRequestMethod();
         if (method.equalsIgnoreCase("GET") && (path.equals("/movies") || path.startsWith("/movies/"))) {
-            if(path.startsWith("/movies/")) {
+            if (path.startsWith("/movies/")) {
                 try {
 
                     int id = Integer.parseInt(parts[2]);
-                    if(store.getByID(id)==null) {
+                    if (store.getByID(id) == null) {
                         sendJson(ex, 404, gson.toJson(new ErrorResponse("Фильм не найден")));
                     } else {
                         sendJson(ex, 200, gson.toJson(store.getByID(id)));
                     }
-                }catch(NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                       sendJson(ex,400, gson.toJson(new ErrorResponse("Некорректный ID")));
                 }
-            }else {
+            } else {
                 if (query == null) {
                     String movieList = gson.toJson(store.getAll());
                     sendJson(ex, 200, movieList);
-                } else if(!query.startsWith("year=")) {
+                } else if (!query.startsWith("year=")) {
                     sendJson(ex, 400, gson.toJson(new ErrorResponse("Некорректный параметр запроса — 'year'")));
                 } else {
                     try {
                         int year = Integer.parseInt(query.substring(5));
                         sendJson(ex, 200, gson.toJson(store.getAll().stream().filter(movie -> movie.getYear() == year).toList()));
-                    } catch(NumberFormatException e) {
+                    } catch (NumberFormatException e) {
                         sendJson(ex, 400, gson.toJson(new ErrorResponse("Некорректный параметр запроса — year")));
                     }
                 }
             }
-        } else if(method.equalsIgnoreCase("DELETE") && path.startsWith("/movies/")) {
+        } else if (method.equalsIgnoreCase("DELETE") && path.startsWith("/movies/")) {
             try {
                 int id = Integer.parseInt(parts[2]);
                 if (store.getByID(id) == null) {
@@ -66,10 +66,10 @@ public class MoviesHandler extends BaseHttpHandler { // Расширьте ба�
                     store.deleteMovie(id);
                     sendNoContent(ex);
                 }
-            } catch(NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 sendJson(ex,400, gson.toJson(new ErrorResponse("Некорректный ID")));
             }
-        } else if(method.equalsIgnoreCase("POST") && path.equals("/movies")) {
+        } else if (method.equalsIgnoreCase("POST") && path.equals("/movies")) {
 
             String contentType = ex.getRequestHeaders().getFirst("Content-Type");
 
@@ -90,16 +90,16 @@ public class MoviesHandler extends BaseHttpHandler { // Расширьте ба�
             int year = movie.getYear();
             List<String> details = new ArrayList<>();
 
-            if(title == null || title.isBlank()) {
+            if (title == null || title.isBlank()) {
                 details.add("Название не должно быть пустым");
-            } else if(title.length()>100) {
+            } else if (title.length()>100) {
                 details.add("Название не должно быть более 100 знаков");
             }
-            if(year < 1888 || year >currentYear + 1) {
+            if (year < 1888 || year >currentYear + 1) {
                 details.add("год должен быть между 1888 и " + (currentYear + 1));
             }
 
-            if(!details.isEmpty()) {
+            if (!details.isEmpty()) {
                 sendJson(ex, 422, gson.toJson(new ErrorResponse("Ошибка валидации", details)));
             } else {
                 sendJson(ex, 201, gson.toJson(store.addMovie(movie)));
