@@ -61,13 +61,9 @@ public class MoviesApiTest {
         HttpRequest req1 = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString("""
-                        {
-                          "title": "Сопрано",
-                          "year": 2004
-                        }
-                        """))
-                .build();
+                .POST(HttpRequest.BodyPublishers.ofString(
+                        "{ \"title\": \"Сопрано\", \"year\": 2004 }"))
+                        .build();
 
         HttpResponse<String> resp1 =
                 client.send(req1, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
@@ -77,12 +73,7 @@ public class MoviesApiTest {
         HttpRequest req2 = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString("""
-                        {
-                          "title": "TEST",
-                          "year": 2005
-                        }
-                        """))
+                .POST(HttpRequest.BodyPublishers.ofString("{ \"title\": \"TEST\", \"year\": 2005 }"))
                 .build();
 
         HttpResponse<String> resp2 = client.send(req2, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
@@ -92,12 +83,7 @@ public class MoviesApiTest {
         HttpRequest req3 = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString("""
-                        {
-                          "title": "WWE",
-                          "year": 2005
-                        }
-                        """))
+                .POST(HttpRequest.BodyPublishers.ofString("{ \"title\": \"WWE\", \"year\": 2005 }"))
                 .build();
 
         HttpResponse<String> resp3 = client.send(req3, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
@@ -185,12 +171,7 @@ public class MoviesApiTest {
         HttpRequest req = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString("""
-                        {
-                          "title": " ",
-                          "year": 2004
-                        }
-                        """))
+                .POST(HttpRequest.BodyPublishers.ofString("{ \"title\": \" \", \"year\": 2004 }"))
                 .build();
 
         HttpResponse<String> resp = client.send(req, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
@@ -201,12 +182,7 @@ public class MoviesApiTest {
         HttpRequest req1 = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString("""
-                        {
-                          "title": "%s",
-                          "year": 2004
-                        }
-                        """.formatted(longTitle)))
+                .POST(HttpRequest.BodyPublishers.ofString("{ \"title\": \"%s\", \"year\": 2004 }".formatted(longTitle)))
                 .build();
 
         HttpResponse<String> resp1 = client.send(req1, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
@@ -216,12 +192,7 @@ public class MoviesApiTest {
         HttpRequest req2 = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString("""
-                        {
-                          "title": "TEST",
-                          "year": 2300
-                        }
-                        """))
+                .POST(HttpRequest.BodyPublishers.ofString("{ \"title\": \"TEST\", \"year\": 2300 }"))
                 .build();
 
         HttpResponse<String> resp2 = client.send(req2, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
@@ -231,12 +202,7 @@ public class MoviesApiTest {
         HttpRequest req3 = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
                 .header("Content-Type", "application/jso")
-                .POST(HttpRequest.BodyPublishers.ofString("""
-                        {
-                          "title": "TEST",
-                          "year": 2000
-                        }
-                        """))
+                .POST(HttpRequest.BodyPublishers.ofString("{ \"title\": \"TEST\", \"year\": 2000 }"))
                 .build();
 
         HttpResponse<String> resp3 = client.send(req3, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
@@ -246,11 +212,7 @@ public class MoviesApiTest {
         HttpRequest req4 = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString("""
-                        {
-                          "title"
-                        }
-                        """))
+                .POST(HttpRequest.BodyPublishers.ofString("{ \"title\" }"))
                 .build();
 
         HttpResponse<String> resp4 =
@@ -265,12 +227,7 @@ public class MoviesApiTest {
         HttpRequest req10 = HttpRequest.newBuilder()
                 .uri(URI.create(BASE + "/movies"))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString("""
-                        {
-                          "title": "King Kong",
-                          "year": 2012
-                        }
-                        """))
+                .POST(HttpRequest.BodyPublishers.ofString("{ \"title\": \"King Kong\", \"year\": 2012 }"))
                 .build();
 
         HttpResponse<String> resp10 = client.send(req10, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
