@@ -96,7 +96,7 @@ public class MoviesHandler extends BaseHttpHandler { // Расширьте ба�
             } else if (title.length() > 100) {
                 details.add("Название не должно быть более 100 знаков");
             }
-            if (year < 1888 || year >currentYear + 1) {
+            if (year < 1888 || year > currentYear + 1) {
                 details.add("год должен быть между 1888 и " + (currentYear + 1));
             }
 
